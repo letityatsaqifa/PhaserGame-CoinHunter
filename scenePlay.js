@@ -10,12 +10,12 @@ var scenePlay = new Phaser.Class({
     preload: function(){
         this.load.image("background", "assets/BG3.jpg");
         this.load.image("btn_play", "assets/buttonPlay2.png");
-        this.load.image("gameover", "assets/GameOver2.png");
+        this.load.image("gameover", "assets/gameOver2.png");
         this.load.spritesheet("coin", "assets/koin5.png", { frameWidth: 50, frameHeight: 50 });
         this.load.spritesheet("enemy1", "assets/enemy1.png", { frameWidth: 112, frameHeight: 80 });
         this.load.spritesheet("enemy2", "assets/enemy2.png", { frameWidth: 104, frameHeight: 80 });
         this.load.spritesheet("enemy3", "assets/enemy3.png", { frameWidth: 106, frameHeight: 80 });
-        this.load.image("coin_panel", "assets/PanelCoin.png");
+        this.load.image("coin_panel", "assets/panelCoin.png");
         this.load.image("ground", "assets/tile2.png");
         this.load.image("ground2", "assets/tile4.png");
         this.load.image("ground3", "assets/tile3.png");
