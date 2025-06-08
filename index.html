@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.55.0/dist/phaser-arcade-physics.min.js"></script>
+    <script src="scenePlay.js"></script>
+    <script>
+        var layoutSize = { 'w': 1300, 'h': 742 };
+        var X_POSITION;
+        var Y_POSITION;
+        var relativeSize;
+    </script>
+</head>
+<body>
+    <script>
+        const config = {
+            type: Phaser.AUTO,
+            width: 1300,
+            height: 742,
+            scene: [scenePlay],
+            physics: {
+                default: 'arcade',
+                arcade: {
+                    debug: false
+                }
+            },
+            scale: {
+                autoCenter: Phaser.Scale.CENTER_BOTH
+            }
+        };
+        const game = new Phaser.Game(config);
+    </script>
+</body>
+</html>
