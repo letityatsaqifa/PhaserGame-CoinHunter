@@ -260,7 +260,35 @@ var scenePlay = new Phaser.Class({
 
         this.repeatButton.on('pointerdown', function() {
             if (activeScene.isSoundEffectsOn) activeScene.snd_touch.play();
-            activeScene.scene.restart();
+            
+            // Reset level ke 1 dan skor ke 0
+            currentLevel = 1;
+            countCoin = 0;
+            coinText.setText('0');
+            
+            // Reset player position
+            activeScene.player.setPosition(100, 500);
+            
+            // Siapkan dunia baru untuk level 1
+            prepareWorld();
+            
+            // Jika game sedang pause, lanjutkan
+            if (activeScene.isGamePaused) {
+                activeScene.physics.resume();
+                activeScene.player.anims.resume();
+                activeScene.isGamePaused = false;
+                activeScene.pauseButton.setVisible(true);
+                activeScene.unpauseButton.setVisible(false);
+            }
+            
+            // Aktifkan kembali game
+            activeScene.gameStarted = true;
+            activeScene.physics.resume();
+            
+            // Mulai ulang musik jika perlu
+            if (activeScene.isMusicOn && !activeScene.music_play.isPlaying) {
+                activeScene.music_play.play();
+            }
         });
 
         // Tombol Pause (di kiri tombol repeat)
@@ -464,9 +492,44 @@ var scenePlay = new Phaser.Class({
                     activeScene.repeatButton.disableInteractive();
                     activeScene.unpauseButton.disableInteractive();
 
-                    repeatButton.on('pointerdown', function() {
-                        if (activeScene.isSoundEffectsOn) activeScene.snd_touch.play();
-                        activeScene.scene.restart();
+                    repeatButton.on('pointerdown', () => {
+                        if (this.isSoundEffectsOn) this.snd_touch.play();
+                        
+                        // Reset level ke 1 dan skor ke 0
+                        currentLevel = 1;
+                        countCoin = 0;
+                        coinText.setText('0');
+                        
+                        // Reset player position
+                        this.player.setPosition(100, 500);
+                        this.player.clearTint();
+                        
+                        // Siapkan dunia baru untuk level 1
+                        prepareWorld();
+                        
+                        // Aktifkan kembali game
+                        this.gameStarted = true;
+                        this.physics.resume();
+                        
+                        // Mulai ulang musik
+                        if (this.isMusicOn && !this.music_play.isPlaying) {
+                            this.music_play.play();
+                        }
+                        
+                        // Hapus elemen-elemen game over
+                        gameOverImage.destroy();
+                        loseScore.destroy();
+                        scoreText.destroy();
+                        repeatButton.destroy();
+                        homeButton.destroy();
+                        loseDarken.destroy();
+                        
+                        // Aktifkan kembali tombol-tombol kontrol
+                        this.musicButton.setInteractive();
+                        this.soundButton.setInteractive();
+                        this.pauseButton.setInteractive();
+                        this.repeatButton.setInteractive();
+                        this.unpauseButton.setInteractive();
                     });
                     homeButton.on('pointerdown', function() {
                         if (activeScene.isSoundEffectsOn) activeScene.snd_touch.play();
